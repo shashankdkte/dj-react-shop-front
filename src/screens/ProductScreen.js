@@ -4,29 +4,30 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import Rating from '../components/Rating'
 import axios from 'axios'
+import { useDispatch,useSelector } from 'react-redux'
+import { listProductDetail } from '../actions/productAction'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 function ProductScreen(props) {
-    const [product, setProduct] = useState({})
+    // const [product, setProduct] = useState({})
+    const dispatch = useDispatch();
+    const productDetail = useSelector(state => state.productDetail)
+    const {loading,error,product} = productDetail
 const { id } = useParams();
   useEffect(() => {
-    async function getProduct()
-    {
-
-      const {data} = await axios.get(`/api/products/${id}`)
-      console.log(data)
-      setProduct(data)
-    }
-    getProduct()
-},[id])
+    dispatch(listProductDetail(id))
+},[dispatch,id])
 
   
-  console.log(id);
+
 
 //   const product = products.find((product) => product._id === id);
   return (
     <div>
-      <Link to={`/`} className='btn btn-light my-3'>Go Back</Link>
-      <div>
+          <Link to={`/`} className='btn btn-light my-3'>Go Back</Link>
+          {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+               <div>
         <Row>
           <Col md={6}>
             <Image src={product && product.image}/>
@@ -96,6 +97,8 @@ const { id } = useParams();
                                 </Col>
                             </Row>
       </div>
+          )}
+     
     </div>
   )
 }

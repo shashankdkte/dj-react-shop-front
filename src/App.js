@@ -9,20 +9,19 @@ import ProductScreen from "./screens/ProductScreen";
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
       <Header />
-        <Main>
+    <main className="App">
           <Container>
             <Routes>
               <Route  path="/" element={<HomeScreen />}  exact/>
               <Route  path="/product/:id" element={<ProductScreen />} />
           </Routes>
           </Container>
-        
-      </Main>
+     </main>
       <Footer/>
-     </div>
     </BrowserRouter>
+  
+        
   );
 }
 
