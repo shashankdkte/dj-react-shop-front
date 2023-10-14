@@ -20,11 +20,10 @@ const { id } = useParams();
   useEffect(() => {
     dispatch(listProductDetail(id))
 },[dispatch,id])
-console.log(product)
+
   
     const addtoCartHandler = (e) => {
         e.preventDefault();
-        console.log(`Add to cart ${qty}`)
         navigate(`/cart/${id}?qty=${qty}`)
 }
 
