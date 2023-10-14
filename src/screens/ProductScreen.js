@@ -38,7 +38,7 @@ const { id } = useParams();
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
+                                            <Rating value={product.rating} text={`${product.num_reviews} reviews`} color={'#f8e825'} />
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -86,7 +86,7 @@ const { id } = useParams();
                                                 <Button
                                                     
                                                     className='btn-block'
-                                                    disabled={product.countInStock == 0}
+                                                    disabled={product.countInStock === 0}
                                                     type='button'>
                                                     Add to Cart
                                                 </Button>
