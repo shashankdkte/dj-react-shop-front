@@ -14,9 +14,7 @@ function HomeScreen() {
   useEffect(() => {
     dispatch(listProducts())
 },[dispatch])
-console.log(loading)
-console.log(error)
-console.log(products)
+
   return (
     <div>
       <h1>Latest Products</h1>

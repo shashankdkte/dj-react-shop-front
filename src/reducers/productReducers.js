@@ -38,7 +38,7 @@ export const productDetailReducer = (state = { product: {review:[]} }, action) =
         ...state,loading:true,
       }
     case PRODUCT_DETAIL_SUCCESS:
-      console.log(action.payload)
+      
       return {
         ...state,loading:false, product:action.payload
       }
