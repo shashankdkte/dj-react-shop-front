@@ -16,7 +16,7 @@ function Header() {
               <LinkContainer to={`/cart`}>
             <Nav.Link href="#home"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/profile'>
+              <LinkContainer to='/login'>
             <Nav.Link href="#link"><i className="fas fa-user"></i> Login</Nav.Link>
                </LinkContainer>
                 
