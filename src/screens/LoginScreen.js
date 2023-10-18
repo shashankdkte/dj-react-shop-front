@@ -5,7 +5,7 @@ import {useDispatch,useSelector} from "react-redux"
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { login } from '../actions/userAction';
+import { login, register } from '../actions/userAction';
 
 function LoginScreen() {
     const [email, setEmail] = useState('')
@@ -21,7 +21,7 @@ function LoginScreen() {
   useEffect(() => {
     if (userInfo)
     {
-      navigate("/")
+      navigate(redirect)
     }
   }, [userInfo, redirect, navigate])
   
