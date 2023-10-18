@@ -44,3 +44,9 @@ export const login = (email, password) => async (dispatch) => {
         })
   }
 }
+
+export const logout = () => (dispatch) => {
+  console.log("dith")
+   localStorage.removeItem('userInfo')
+    dispatch({ type: USER_LOGOUT })
+}
