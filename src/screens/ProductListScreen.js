@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { listProducts } from '../actions/productAction';
+import { deleteProduct, listProducts } from '../actions/productAction';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -13,6 +13,8 @@ function ProductListScreen() {
   const productList = useSelector(state => state.productList);
   const { loading, error, products } = productList;
 
+  const productDelete = useSelector(state => state.productDelete);
+  const {loading:loadingDelete,error:errorDelete,success:successDelete } = productDelete;
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
@@ -27,7 +29,15 @@ function ProductListScreen() {
       dispatch(listProducts());
 
     }
-  },[dispatch,navigate,userInfo])
+  }, [dispatch, navigate, userInfo,successDelete])
+  
+
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure you want to delete this product?'))
+    {
+      dispatch(deleteProduct(id))
+    }
+  }
   return (
     <div>
       <Row className='align-items-center'>
@@ -74,7 +84,7 @@ function ProductListScreen() {
                                                     </Button>
                                                 </LinkContainer>
 
-                                                <Button variant='danger' className='btn-sm' onClick={() =>{}}>
+                                                <Button variant='danger' className='btn-sm' onClick={() =>deleteHandler(product._id)}>
                                                     <i className='fas fa-trash'></i>
                                                 </Button>
                                             </td>
