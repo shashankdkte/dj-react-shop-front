@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createProduct, deleteProduct, listProducts } from '../actions/productAction';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { LinkContainer } from 'react-router-bootstrap';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
+import Paginate from '../components/Paginate';
 
 function ProductListScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const productList = useSelector(state => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products,pages,page } = productList;
 
   const productDelete = useSelector(state => state.productDelete);
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
@@ -22,7 +23,8 @@ function ProductListScreen() {
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
-
+ const location = useLocation();
+  let keyword = location.search
   useEffect(() => {
     dispatch({type:PRODUCT_CREATE_RESET})
     if (!userInfo.isAdmin)
@@ -36,10 +38,10 @@ function ProductListScreen() {
       }
     else
     {
-      dispatch(listProducts());
+      dispatch(listProducts(keyword));
 
     }
-  }, [dispatch, navigate, userInfo,successDelete,successCreate,createdProduct])
+  }, [dispatch, navigate, userInfo,successDelete,successCreate,createdProduct,keyword])
   
 
   const deleteHandler = (id) => {
@@ -108,7 +110,8 @@ function ProductListScreen() {
                                         </tr>
                                     ))}
                                 </tbody>
-                            </Table>
+                </Table>
+                <Paginate pages={pages} page={page} isAdmin={true} />
                         </div>
                     )}
       </Row>

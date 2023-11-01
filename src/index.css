@@ -57,3 +57,15 @@ h3{
   display: flex;
   gap:1rem;
 }
+
+.paginate-items{
+  /* display: inline-block; */
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.paginate-items.active{
+  background-color: black;
+  color:white
+}
