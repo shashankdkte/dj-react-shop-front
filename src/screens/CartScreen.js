@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import  Message  from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartAction';
+import { BASE_API_URL } from '../constants/cartConstants';
 
 
 function CartScreen() {
@@ -41,11 +42,13 @@ function CartScreen() {
           </Message>
         ) : (
             <ListGroup variant='flush'>
-              {cartItems.map(item => (
+              {cartItems.map(item => {
+                 const image = `${BASE_API_URL + item.image}`
+                return (
                 <ListGroup.Item key={item.product}>
                   <Row>
                     <Col md={2}>
-                      <Image src={item.image} alt={item.name} fluid rounded/>
+                      <Image src={image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
@@ -53,22 +56,22 @@ function CartScreen() {
                     <Col md={2}>
                       ${item.price}
                     </Col>
-                      <Col md={3}>
-                                            <Form.Control
-                                                as="select"
-                                                value={item.qty}
-                                                onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
-                                            >
-                                                {
+                    <Col md={3}>
+                      <Form.Control
+                        as="select"
+                        value={item.qty}
+                        onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
+                      >
+                        {
 
-                                                    [...Array(item.count_in_stock).keys()].map((x) => (
-                                                        <option key={x + 1} value={x + 1}>
-                                                            {x + 1}
-                                                        </option>
-                                                    ))
-                                                }
+                          [...Array(item.count_in_stock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))
+                        }
 
-                                            </Form.Control>
+                      </Form.Control>
                     </Col>
                     <Col md={1}>
                       <Button type='button' variant='light' onClick={() => removeCartHandler(item.product)}>
@@ -78,8 +81,8 @@ function CartScreen() {
                     </Col>
                     
                   </Row>
-                  </ListGroup.Item>
-                ))}
+                </ListGroup.Item>
+             ) })}
             </ListGroup>
         )}
       </Col>

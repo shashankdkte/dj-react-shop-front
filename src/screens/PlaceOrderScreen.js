@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { createOrder } from '../actions/orderActions'
+import { BASE_API_URL } from '../constants/cartConstants'
 
 function PlaceOrderScreen() {
     const dispatch = useDispatch()
@@ -75,7 +76,7 @@ function PlaceOrderScreen() {
                                             <ListGroup.Item key={index}>
                                                 <Row>
                                                     <Col md={1}>
-                                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                                        <Image src={`${BASE_API_URL + item.image}`} alt={item.name} fluid rounded />
                                                     </Col>
 
                                                     <Col>

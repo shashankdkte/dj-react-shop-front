@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstants';
+import { BASE_API_URL } from '../constants/cartConstants';
 
 function OrderScreen() {
   const { id: orderId } = useParams();
@@ -121,29 +122,32 @@ function OrderScreen() {
                                 </ListGroup.Item>
                                                                 <ListGroup.Item>
                                     <h2>Order Items</h2>
-                                    {order.orderItems.length === 0 ? <Message variant='info'>
-                                        Order is empty
-                            </Message> : (
-                                            <ListGroup variant='flush'>
-                                                {order.orderItems.map((item, index) => (
-                                                    <ListGroup.Item key={index}>
-                                                        <Row>
-                                                            <Col md={1}>
-                                                                <Image src={item.image} alt={item.name} fluid rounded />
-                                                            </Col>
+                    {order.orderItems.length === 0 ? <Message variant='info'>
+                      Order is empty
+                    </Message> : (
+                      <ListGroup variant='flush'>
+                          {order.orderItems.map((item, index) => {
+                             const image = `${BASE_API_URL + item.image}`
+                            return (
+                              <ListGroup.Item key={index}>
+                                <Row>
+                                  <Col md={1}>
+                                    <Image src={image} alt={item.name} fluid rounded />
+                                  </Col>
 
-                                                            <Col>
-                                                                <Link to={`/product/${item.product}`}>{item.name}</Link>
-                                                            </Col>
+                                  <Col>
+                                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                  </Col>
 
-                                                            <Col md={4}>
-                                                                {item.quantity} X ${item.price} = ${(item.quantity * item.price).toFixed(2)}
-                                                            </Col>
-                                                        </Row>
-                                                    </ListGroup.Item>
-                                                ))}
-                                            </ListGroup>
-                                        )}
+                                  <Col md={4}>
+                                    {item.quantity} X ${item.price} = ${(item.quantity * item.price).toFixed(2)}
+                                  </Col>
+                                </Row>
+                              </ListGroup.Item>
+                            )
+                          })}
+                      </ListGroup>
+                    )}
                                 </ListGroup.Item>
 
                 </ListGroup>
