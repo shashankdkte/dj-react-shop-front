@@ -8,6 +8,7 @@ import Message from "../components/Message";
 import { Button, Form } from "react-bootstrap";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import axios from "axios";
+import { BASE_API_URL } from "../constants/cartConstants";
 
 function ProductEditScreen() {
 
@@ -87,7 +88,7 @@ function ProductEditScreen() {
                 }
             }
 
-            const { data } = await axios.post('/api/products/upload/', formData, config)
+            const { data } = await axios.post(`${BASE_API_URL}/api/products/upload/`, formData, config)
 
 
             setImage(data)

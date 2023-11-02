@@ -21,7 +21,7 @@ import {
   ORDER_DELIVER_FAIL
 } from "../constants/orderConstants";
 
-import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
+import { BASE_API_URL, CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -37,7 +37,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       }
     }
     
-    const { data } = await axios.post(`/api/orders/add`, order, config);
+    const { data } = await axios.post(`${BASE_API_URL}/api/orders/add`, order, config);
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload:data
@@ -79,7 +79,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     }
 
 
-    const { data } = await axios.get(`/api/orders/${id}/`, config);
+    const { data } = await axios.get(`${BASE_API_URL}/api/orders/${id}/`, config);
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -111,7 +111,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             }
     }
     
-    const { data } = await axios.put(`/api/orders/${id}/pay/`, paymentResult, config);
+    const { data } = await axios.put(`${BASE_API_URL}/api/orders/${id}/pay/`, paymentResult, config);
     dispatch({
       type: ORDER_PAY_SUCCESS,
       payload:data
@@ -143,7 +143,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         }
 
         const { data } = await axios.get(
-            `/api/orders/myorders/`,
+            `${BASE_API_URL}/api/orders/myorders/`,
             config
     )
     
@@ -177,7 +177,7 @@ export const listOrders = () => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.get(`/api/orders/`, config);
+    const { data } = await axios.get(`${BASE_API_URL}/api/orders/`, config);
     dispatch({
             type: ORDER_LIST_SUCCESS,
             payload: data
@@ -214,7 +214,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/orders/${order._id}/deliver/`,
+            `${BASE_API_URL}/api/orders/${order._id}/deliver/`,
             {},
             config
         )

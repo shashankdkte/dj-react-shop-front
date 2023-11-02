@@ -27,6 +27,7 @@ import {
   USER_UPDATE_FAIL,
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
+import { BASE_API_URL } from '../constants/cartConstants';
 
 export const login = (email, password) => async (dispatch) => {
   try
@@ -43,7 +44,7 @@ export const login = (email, password) => async (dispatch) => {
     console.log(email,password);
     
     const { data } = await axios.post(
-            '/api/users/login/',
+            `${BASE_API_URL}/api/users/login/`,
             { 'username': email, 'password': password },
             config
         )
@@ -92,7 +93,7 @@ export const register = (name,email, password) => async (dispatch) => {
    
     
     const { data } = await axios.post(
-            '/api/users/register/',
+            `${BASE_API_URL}/api/users/register/`,
             { 'name':name,'email': email, 'password': password },
             config
         )
@@ -135,7 +136,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             }
     }
      const { data } = await axios.get(
-            `/api/users/${id}/`,
+            `${BASE_API_URL}/api/users/${id}/`,
             config
         )
 
@@ -175,7 +176,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/profile/update/`,
+            `${BASE_API_URL}/api/users/profile/update/`,
             user,
             config
         )
@@ -218,7 +219,7 @@ export const listUsers = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(`/api/users/`, config);
+        const { data } = await axios.get(`${BASE_API_URL}/api/users/`, config);
 
         dispatch({
             type: USER_LIST_SUCCESS,
@@ -254,7 +255,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.delete(
-            `/api/users/delete/${id}/`,
+            `${BASE_API_URL}/api/users/delete/${id}/`,
             config
         )
 
@@ -292,7 +293,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/update/${user._id}/`,
+            `${BASE_API_URL}/api/users/update/${user._id}/`,
             user,
             config
         )
