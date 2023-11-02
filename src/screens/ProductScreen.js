@@ -8,6 +8,7 @@ import { createProductReview, listProductDetail } from '../actions/productAction
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import { BASE_API_URL } from '../constants/cartConstants'
 
 function ProductScreen(props) {
     // const [product, setProduct] = useState({})
@@ -58,7 +59,8 @@ const { id } = useParams();
         }
         ))
     }
-//   const product = products.find((product) => product._id === id);
+    //   const product = products.find((product) => product._id === id);
+     const image = `${BASE_API_URL + product.image}`
   return (
     <div>
           <Link to={`/`} className='btn btn-light my-3'>Go Back</Link>
@@ -66,7 +68,7 @@ const { id } = useParams();
                <div>
         <Row>
           <Col md={6}>
-            <Image src={product && product.image}/>
+            <Image src={product && image}/>
           </Col>
           <Col md={3}>
                                     <ListGroup variant="flush">
