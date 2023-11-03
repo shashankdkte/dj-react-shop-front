@@ -21,7 +21,7 @@ function ProductCarousel() {
         : error
             ? <Message variant='danger'>{error}</Message>
             : (
-                <Carousel pause='hover' className='bg-dark'>
+                <Carousel pause='hover' className='dark mb-6'>
                   {products.map(product => {
                       const image = `${BASE_API_URL + product.image}`
 

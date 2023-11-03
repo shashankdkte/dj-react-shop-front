@@ -9,6 +9,11 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { BASE_API_URL } from '../constants/cartConstants'
+import ProductMultiImage from '../components/ProductMultiImage'
+import ProductColors from '../components/ProductColors'
+import ProductSizes from '../components/ProductSizes'
+import ProductBuyComponent from '../components/ProductBuyComponent'
+import ShippingComponentProduct from '../components/ShippingComponentProduct'
 
 function ProductScreen(props) {
     // const [product, setProduct] = useState({})
@@ -65,54 +70,66 @@ const { id } = useParams();
     <div>
           <Link to={`/`} className='btn btn-light my-3'>Go Back</Link>
           {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-               <div>
-        <Row>
-          <Col md={6}>
-            <Image src={product && image}/>
-          </Col>
-          <Col md={3}>
-                                    <ListGroup variant="flush">
+              <div>
+    <div class="bread-crumbs">
+      <a href="/">Popular Products</a> - <a href="#">Waffle-Knit Top</a>
+    </div>
+        <Row  className="mb-4">
+                      <Col md={1}>
+                          <ProductMultiImage />
+                          </Col>
+                      <Col md={5}>
+                          <div className="product-container-main-image">      
+                              <Image src={product && image}  className='mb-4'/>
+                               <Card className='p-4 mb-small'>
+                                           <p className='label'>Description</p> {product.description}
+                                        </Card>
+                          </div>
+                        </Col>
+                        <Col md={6}>
+                          <Row className="product-info pl-4">
+                                    <ListGroup.Item variant="flush">
                                         <ListGroup.Item>
-                                            <h3>{product.name}</h3>
+                                            <h3 className='product-name'>{product.name}</h3>
                                         </ListGroup.Item>
-
+                                  <ListGroup.Item>
+                                      <p class="product-seller">by <u>Zenna</u> <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></p>
+                                        </ListGroup.Item>
                                         <ListGroup.Item>
                                             <Rating value={product.rating} text={`${product.num_reviews} reviews`} color={'#f8e825'} />
                                         </ListGroup.Item>
 
-                                        <ListGroup.Item>
-                                            Price: ${product.price}
+                                  
+                                       <ListGroup.Item className="product-info-pricing-shipping">
+                        
+                                           <div class="product-price">
+            <h2> ${product.price}</h2>
+            <div class="product-price-save">
+              <p class="discount">$20.99</p>
+              <p>you save $14</p>
+            </div>
+                                          </div>
+                                          <p class="product-shipping"><i class="fa-solid fa-truck"></i> Free Shipping</p>
+          <p class="product-shipping"><i class="fa-solid fa-person-walking-arrow-loop-left"></i> Free Returns</p>
                                         </ListGroup.Item>
-
-                                        <ListGroup.Item>
-                                            Description: {product.description}
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
-            <Col md={3}>
-                                    <Card>
-                                        <ListGroup variant='flush'>
-                                            <ListGroup.Item>
-                                                <Row>
-                                                    <Col>Price:</Col>
-                                                    <Col>
-                                                        <strong>${product.price}</strong>
-                                                    </Col>
-                                                </Row>
-                                            </ListGroup.Item>
-                                            <ListGroup.Item>
-                                                <Row>
-                                                    <Col>Status:</Col>
-                                                    <Col>
-                                                        {product.count_in_stock > 0 ? 'In Stock' : 'Out of Stock'}
-                                                    </Col>
-                                                </Row>
-                                            </ListGroup.Item>
-
-                                            {product.count_in_stock > 0 && (
-                                      <ListGroup.Item>
-                                          <Row>
-                                              <Col>Qty</Col>
+                                  
+                                  <ListGroup.Item>
+                                      <ProductColors />
+                                       </ListGroup.Item>
+                                    <ListGroup.Item>
+                                      <ProductSizes />
+                                  </ListGroup.Item>
+                                  {product.count_in_stock > 0 && <p class="product-info-stock p-2"><i class="fa-solid fa-circle-info"></i> {product.count_in_stock < 25 ? `Only ${product.count_in_stock} left in stock` : ' Available In Stock'}</p>}
+                                  {product.count_in_stock <= 0 && <p class="product-info-stock p-2"><i class="fa-solid fa-circle-info"></i>Out Of Stock</p>}
+                                  <ListGroup.Item className='mb-small'> 
+                                      <ProductBuyComponent />
+                                  </ListGroup.Item>      
+                                  
+                              </ListGroup.Item>
+                                   {product.count_in_stock > 0 && (
+                                      <ListGroup.Item className='mb-small'>
+                                          <Row style={{width:"50%"}}>
+                                              <Col className='label'>Quantity</Col>
                                               <Col xs="auto" className='my-1'>
                                                   <Form.Control as="select"
                                                       value={qty}
@@ -129,25 +146,45 @@ const { id } = useParams();
                                           </Row>
                                       </ListGroup.Item>
                                   )}
-
-
-                                            <ListGroup.Item>
-                                                <Button
+                                </Row>
+                          <Row> <Button
                                                     
-                                                    className='btn-block'
+                                                    className='add-to-card-btn mb-small' 
                                                     disabled={product.count_in_stock === 0}
                                                     type='button' onClick={addtoCartHandler}>
                                                     Add to Cart
                                                 </Button>
-                                  </ListGroup.Item>
+                             
+                                    <ShippingComponentProduct/>
+                                            {/* <ListGroup.Item>
+                                                <Row>
+                                                    <Col>Price:</Col>
+                                                    <Col>
+                                                        <strong>${product.price}</strong>
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item> */}
+                                            {/* <ListGroup.Item>
+                                                <Row>
+                                                    <Col>Status:</Col>
+                                                    <Col>
+                                                        {product.count_in_stock > 0 ? 'In Stock' : 'Out of Stock'}
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item> */}
+
+                                       
+
+
+                                           
                                   
-                                        </ListGroup>
-                                    </Card>
-                                </Col>
-                            </Row>
-       <Row>
-                                <Col md={6}>
-                                    <h4>Reviews</h4>
+                                      
+                                </Row>
+                      </Col>
+                      </Row>
+       <Row className='pt-4'>
+                                <Col md={6} className='py-2'>
+                                    <h4 className='label'>Reviews</h4>
                                     {product.reviews && product.reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
 
                                     <ListGroup variant='flush'>
@@ -160,8 +197,13 @@ const { id } = useParams();
                                             </ListGroup.Item>
                                         ))}
 
-                                        <ListGroup.Item>
-                                            <h4>Write a review</h4>
+                                     
+                                    </ListGroup>
+                      </Col>
+                      <Col md={6}>
+                          <ListGroup variant='flush'>
+                                 <ListGroup.Item>
+                                            <h4 className='label'>Write a review</h4>
 
                                             {loadingProductReview && <Loader />}
                                             {successProductReview && <Message variant='success'>Review Submitted</Message>}
@@ -208,8 +250,8 @@ const { id } = useParams();
                                                     <Message variant='info'>Please <Link to='/login'>login</Link> to write a review</Message>
                                                 )}
                                         </ListGroup.Item>
-                                    </ListGroup>
-                                </Col>
+                          </ListGroup>
+                       </Col>
                             </Row>
                         </div>
           )}

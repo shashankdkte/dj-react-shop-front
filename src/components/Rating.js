@@ -8,7 +8,7 @@ function getHalfStar(color) {
 function getBlankStart(color) {
   return <i style={{ color }} className='far fa-star'></i>
 }
-function Rating({value, text,color}) {
+function Rating({value, text,color,textValue=true}) {
   return (
     <div className="rating">
       {[...Array(5)].map((e, i) => {

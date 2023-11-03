@@ -20,20 +20,24 @@ function SearchBox() {
     }
 
   return (
-     <Form onSubmit={submitHandler} className='flex'>
+    <Form onSubmit={submitHandler} className='flex'>
+      <div className='navbar_search-section'>
+
             <Form.Control
-                type='text'
+          type='text'
+          placeholder="🔎 I'm shopping for"
                 name='q'
                 onChange={(e) => setKeyword(e.target.value)}
-                className='mr-sm-2 ml-sm-5'
-            ></Form.Control>
+                className='mr-sm-2 ml-sm-5 '
+                ></Form.Control>
+                </div>
 
             <Button
                 type='submit'
-                variant='outline-success'
-                className='p-2'
+                variant=''
+        className='btn-submit'
             >
-                Submit
+                Search
             </Button>
         </Form>
   )

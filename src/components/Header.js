@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { logout } from '../actions/userAction';
 import SearchBox from './SearchBox';
+import DepartmentNav from './DepartmentNav';
+import NavList from './NavList';
 function Header() {
 
   const userLogin = useSelector(state => state.userLogin);
@@ -18,19 +20,31 @@ function Header() {
   return (
     <header>
 
-    <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
-          <LinkContainer to={'/'} >
-        <Navbar.Brand>Proshop</Navbar.Brand>
+      <Navbar collapseOnSelect>
+        <Container className='header'>
+          <LinkContainer to={'/'}   className='navbar__logo-section'>
+        <Navbar.Brand>Rivly</Navbar.Brand>
           </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <DepartmentNav/>
             <SearchBox />
-            <Nav className="me-auto">
-              <LinkContainer to={`/cart`}>
-            <Nav.Link href="#home"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
-              </LinkContainer>
-              {userInfo ? (  <NavDropdown title={userInfo.name} id='username'>
+            <Nav>
+              <div className="navbar_cart-button-section">
+
+            <LinkContainer to={`/cart`} className='cart-icon-container'>
+            <Nav.Link href="#home"><i className="fa fa-shopping-cart"></i></Nav.Link>
+                </LinkContainer>
+                <div class="cart-count">
+              <span>2</span>
+            </div>
+              </div>
+              <div class="navbar_amount-section">
+            <p class="amount-user-icon">R</p>
+            <p class="amount-user-content">$0.00</p>
+          </div>
+              {userInfo ? (<NavDropdown title={userInfo.name} id='username'>
+                
                 <LinkContainer to='/profile'>
             <NavDropdown.Item >Profile</NavDropdown.Item>
                 </LinkContainer>
@@ -39,8 +53,9 @@ function Header() {
                 
                 </NavDropdown>
                 )
-                : (   <LinkContainer to='/login'>
-            <Nav.Link><i className="fas fa-user"></i> Login</Nav.Link>
+                : (<LinkContainer to='/login'>
+                  
+            <Nav.Link className='navbar_profile-section'><i className="fas fa-user"></i> Login</Nav.Link>
                </LinkContainer>
                 )
                 }
@@ -65,7 +80,8 @@ function Header() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+      <NavList/>
+      </Navbar>
     </header>
   )
 }
