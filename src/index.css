@@ -641,8 +641,8 @@ gap: 0.5rem;
 
 .product-card{
   border-radius: 10% !important;
-    height: 40rem;
-    width: 30rem;
+    height: 36rem;
+    width: 26rem;
     overflow: hidden;
     position: relative;
     border:transparent;
@@ -872,13 +872,13 @@ align-items: center;
   gap: 1rem;
 }
 
-@media (min-width: 1600px){
+/* @media (min-width: 1600px){
 
 
 .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
     max-width: 1500px;
 }
-}
+} */
 .pl-8{
   padding-left: 8rem;
 }
