@@ -1,7 +1,7 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
-import { BrowserRouter, Route,Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route,Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
@@ -20,12 +20,13 @@ import OrderListScreen from "./screens/OrderListScreen";
 
 function App() {
   return (
-    <BrowserRouter>
+  <>
       <Header />
     <main className="App">
           <Container>
             <Routes> 
               <Route  path="/" element={<HomeScreen/>}  exact/>
+              <Route  path="/dj-react-shop-front" element={<HomeScreen />} />
               <Route  path="/login" element={<LoginScreen />}  />
               <Route  path="/register" element={<RegisterScreen />}  />
               <Route  path="/profile" element={<ProfileScreen />}  />
@@ -47,7 +48,7 @@ function App() {
           </Container>
      </main>
       <Footer/>
-    </BrowserRouter>
+      </>
   
         
   );
