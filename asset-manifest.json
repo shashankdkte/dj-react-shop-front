@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/dj-react-shop-front/static/css/main.83a059e0.css",
-    "main.js": "/dj-react-shop-front/static/js/main.267fe0fe.js",
+    "main.js": "/dj-react-shop-front/static/js/main.4f35ad20.js",
     "index.html": "/dj-react-shop-front/index.html",
     "main.83a059e0.css.map": "/dj-react-shop-front/static/css/main.83a059e0.css.map",
-    "main.267fe0fe.js.map": "/dj-react-shop-front/static/js/main.267fe0fe.js.map"
+    "main.4f35ad20.js.map": "/dj-react-shop-front/static/js/main.4f35ad20.js.map"
   },
   "entrypoints": [
     "static/css/main.83a059e0.css",
-    "static/js/main.267fe0fe.js"
+    "static/js/main.4f35ad20.js"
   ]
 }
